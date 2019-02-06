@@ -5,9 +5,10 @@ echo ""
 echo "Applying customizations for Up2U..."
 
 ### 1. Put in place the Up2U logo
-echo "  .Logo ..."
-mv /var/www/html/cernbox/themes/cernbox/core/img/logo-icon.png /var/www/html/cernbox/themes/cernbox/core/img/logo-icon.png.original
-cp up2u_logo.png /var/www/html/cernbox/themes/cernbox/core/img/logo-icon.png
+### Commented out because the following paths does not exist in images used in branch webng_beta_psnc in the upstream repo
+# echo "  .Logo ..."
+# mv /var/www/html/cernbox/themes/cernbox/core/img/logo-icon.png /var/www/html/cernbox/themes/cernbox/core/img/logo-icon.png.original
+# cp up2u_logo.png /var/www/html/cernbox/themes/cernbox/core/img/logo-icon.png
 
 ### 2. Set Up2U Single Sign-On paramters
 # NOTE: Please select 'shibboleth' as authentication method ('AUTH_TYPE') for cernbox Docker image v0.7 and later
