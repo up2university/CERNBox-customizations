@@ -19,6 +19,11 @@ cp sso_config/shibboleth2.xml /etc/shibboleth/shibboleth2.xml
 sed -i "s/LDAPUserBackend/UserBackendSSOtoLDAP/" /var/www/html/cernbox/config/config.php
 ###sed -i "s/LDAPUserBackend/UserBackendSSOtoLDAPNumericUID/" /var/www/html/cernbox/config/config.php
 
+### 3. Configure SWAN API for UP2U SSO
+echo -e '#!/bin/sh\nsh /var/www/html/cernbox/cernbox_scripts/UserBackendSSOtoLDAP.d/ldap_lookup.sh ssouid $1 uid' > /var/www/html/cernbox/cernbox_scripts/get_username.sh
+chmod u+x /var/www/html/cernbox/cernbox_scripts/get_username.sh
+echo "ssotranslaterscript: /var/www/html/cernbox/cernbox_scripts/get_username.sh" >> /etc/cboxswanapid/cboxswanapid.yaml
+echo "ssofield: uid" >> /etc/cboxswanapid/cboxswanapid.yaml
 
 echo "Done"
 echo ""
