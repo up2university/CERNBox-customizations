@@ -25,5 +25,8 @@ chmod u+x /var/www/html/cernbox/cernbox_scripts/get_username.sh
 echo "ssotranslaterscript: /var/www/html/cernbox/cernbox_scripts/get_username.sh" >> /etc/cboxswanapid/cboxswanapid.yaml
 echo "ssofield: uid" >> /etc/cboxswanapid/cboxswanapid.yaml
 
+### 4. Add tracking code
+sed -i "s/<\/body>/<script type=\"application\/javascript\" src=\"https:\/\/cdn.test.up2university.eu\/scripts\/matomo-test.js\"><\/script><\/body>/" /var/www/html/cernbox/core/templates/layout.user.php
+
 echo "Done"
 echo ""
