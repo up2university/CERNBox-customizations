@@ -27,6 +27,10 @@ echo "ssofield: uid" >> /etc/cboxswanapid/cboxswanapid.yaml
 
 ### 4. Add tracking code
 sed -i "s/<\/body>/<script type=\"application\/javascript\" src=\"https:\/\/cdn.test.up2university.eu\/scripts\/matomo-test.js\"><\/script><\/body>/" /var/www/html/cernbox/core/templates/layout.user.php
+# And allow the domain to use it
+sed -i "s/);/'cbox.swan.cspdomains' => ['root.cern.ch', 'cdnjs.cloudflare.com', 'cdn.test.up2university.eu', 'matomo.test.up2university.eu'],);/" /var/www/html/cernbox/config/config.php
+sed -i "s/\$policy->addAllowedScriptDomain(\$domain);/\$policy->addAllowedImageDomain(\$domain);\$policy->addAllowedScriptDomain(\$domain);/" /var/www/html/cernbox/apps/swanviewer/appinfo/app.php
+
 
 echo "Done"
 echo ""
