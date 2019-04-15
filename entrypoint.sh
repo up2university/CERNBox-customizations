@@ -12,18 +12,18 @@ echo "Applying customizations for Up2U..."
 
 ### 2. Set Up2U Single Sign-On paramters
 # NOTE: Please select 'shibboleth' as authentication method ('AUTH_TYPE') for cernbox Docker image v0.7 and later
-echo "  .SSO Configuration..."
-cp sso_config/attribute-map.xml /etc/shibboleth/attribute-map.xml
-sed "s/%%%CERNBOXGATEWAY_HOSTNAME%%%/${CERNBOXGATEWAY_HOSTNAME}/" sso_config/shibboleth2.xml.template > sso_config/shibboleth2.xml
-cp sso_config/shibboleth2.xml /etc/shibboleth/shibboleth2.xml
-sed -i "s/LDAPUserBackend/UserBackendSSOtoLDAP/" /var/www/html/cernbox/config/config.php
+# echo "  .SSO Configuration..."
+# cp sso_config/attribute-map.xml /etc/shibboleth/attribute-map.xml
+# sed "s/%%%CERNBOXGATEWAY_HOSTNAME%%%/${CERNBOXGATEWAY_HOSTNAME}/" sso_config/shibboleth2.xml.template > sso_config/shibboleth2.xml
+# cp sso_config/shibboleth2.xml /etc/shibboleth/shibboleth2.xml
+# sed -i "s/LDAPUserBackend/UserBackendSSOtoLDAP/" /var/www/html/cernbox/config/config.php
 ###sed -i "s/LDAPUserBackend/UserBackendSSOtoLDAPNumericUID/" /var/www/html/cernbox/config/config.php
 
 ### 3. Configure SWAN API for UP2U SSO
-echo -e '#!/bin/sh\nsh /var/www/html/cernbox/cernbox_scripts/UserBackendSSOtoLDAP.d/ldap_lookup.sh ssouid $1 uid' > /var/www/html/cernbox/cernbox_scripts/get_username.sh
-chmod u+x /var/www/html/cernbox/cernbox_scripts/get_username.sh
-echo "ssotranslaterscript: /var/www/html/cernbox/cernbox_scripts/get_username.sh" >> /etc/cboxswanapid/cboxswanapid.yaml
-echo "ssofield: uid" >> /etc/cboxswanapid/cboxswanapid.yaml
+# echo -e '#!/bin/sh\nsh /var/www/html/cernbox/cernbox_scripts/UserBackendSSOtoLDAP.d/ldap_lookup.sh ssouid $1 uid' > /var/www/html/cernbox/cernbox_scripts/get_username.sh
+# chmod u+x /var/www/html/cernbox/cernbox_scripts/get_username.sh
+# echo "ssotranslaterscript: /var/www/html/cernbox/cernbox_scripts/get_username.sh" >> /etc/cboxswanapid/cboxswanapid.yaml
+# echo "ssofield: uid" >> /etc/cboxswanapid/cboxswanapid.yaml
 
 ### 4. Add tracking code
 sed -i "s|<\/body>|<script type=\"application/javascript\" src=\"$TRACKING_URL\"></script></body>|" /var/www/html/cernbox/core/templates/layout.user.php
